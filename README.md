@@ -45,3 +45,6 @@ iex > cost = ExRajaOngkir.Cost.calculate!(from_city, to_city, weight, "jne")
 iex > costs = ExRajaOngkir.Cost.calculate!(from_city, to_city, weight, ~w(jne pos)) # It is able to use when higher than starter.
 %{jne: [%ExRajaOngkir.Cost{...}], pos: [%ExRajaOngkir.Cost{...}]}
 ```
+
+## License
+This project is licensed under the terms of the MIT license, see LICENSE.
