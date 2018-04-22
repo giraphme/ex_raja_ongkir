@@ -1,0 +1,16 @@
+/_build/
+/cover/
+/deps/
+/doc/
+/.fetch
+erl_crash.dump
+*.ez
+ex_raja_ongkir-*.tar
+
+.DS_Store
+*.swp
+*~
+.project
+.idea
+.secret
+.vscode
