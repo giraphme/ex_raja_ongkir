@@ -12,4 +12,21 @@ defmodule ExRajaOngkir do
         raise ExRajaOngkir.Exception.NoApiKey
     end
   end
+
+  def base_url do
+    Application.get_env(:ex_raja_ongkir, :plan, nil)
+    |> case do
+      :starter ->
+        "https://api.rajaongkir.com/starter/"
+
+      :basic ->
+        "https://api.rajaongkir.com/basic/"
+
+      :pro ->
+        "https://pro.rajaongkir.com/api/"
+
+      plan ->
+        raise ExRajaOngkir.Exception.UnsupportedPlan, plan
+    end
+  end
 end

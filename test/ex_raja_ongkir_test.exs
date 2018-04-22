@@ -33,4 +33,29 @@ defmodule ExRajaOngkirTest do
       end)
     end
   end
+
+  describe "ExRajaOngkir.base_url/0" do
+    test "It can get URL string if the plan is :starter" do
+      Application.put_env(:ex_raja_ongkir, :plan, :starter)
+      assert Regex.match?(~r/^https?:\/\//, ExRajaOngkir.base_url())
+    end
+
+    test "It can get URL string if the plan is :basic" do
+      Application.put_env(:ex_raja_ongkir, :plan, :basic)
+      assert Regex.match?(~r/^https?:\/\//, ExRajaOngkir.base_url())
+    end
+
+    test "It can get URL string if the plan is :pro" do
+      Application.put_env(:ex_raja_ongkir, :plan, :pro)
+      assert Regex.match?(~r/^https?:\/\//, ExRajaOngkir.base_url())
+    end
+
+    test "It fail to get URL string because the plan is nosupported" do
+      Application.put_env(:ex_raja_ongkir, :plan, :unknown)
+
+      assert_raise(ExRajaOngkir.Exception.UnsupportedPlan, fn ->
+        ExRajaOngkir.base_url()
+      end)
+    end
+  end
 end
