@@ -1,6 +1,18 @@
 defmodule ExRajaOngkirTest do
   use ExUnit.Case
 
+  setup_all do
+    default_api_key = Application.get_env(:ex_raja_ongkir, :api_key)
+    default_plan = Application.get_env(:ex_raja_ongkir, :plan)
+
+    on_exit(:name, fn ->
+      Application.put_env(:ex_raja_ongkir, :api_key, default_api_key)
+      Application.put_env(:ex_raja_ongkir, :plan, default_plan)
+    end)
+
+    :ok
+  end
+
   describe "ExRajaOngkir.api_key/0" do
     test "It can get the API key by raw string" do
       expected_api_key = "THIS_IS_API_KEY"
