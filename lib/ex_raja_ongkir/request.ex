@@ -7,7 +7,6 @@ defmodule ExRajaOngkir.Request do
 
   def process_request_headers(headers) do
     headers
-    |> Keyword.put(:"Content-Type", "application/json")
     |> Keyword.put(:key, ExRajaOngkir.api_key())
   end
 
