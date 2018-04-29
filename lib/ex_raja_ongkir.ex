@@ -13,8 +13,12 @@ defmodule ExRajaOngkir do
     end
   end
 
-  def base_url do
+  def plan do
     Application.get_env(:ex_raja_ongkir, :plan, nil)
+  end
+
+  def base_url do
+    plan()
     |> case do
       :starter ->
         "https://api.rajaongkir.com/starter/"
