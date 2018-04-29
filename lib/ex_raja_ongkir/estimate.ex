@@ -5,11 +5,11 @@ defmodule ExRajaOngkir.Estimate do
     response
     |> Enum.map(fn estimate ->
       %__MODULE__{
-        etd: estimate[:etd],
-        price: estimate[:value],
+        etd: estimate["etd"],
+        price: estimate["value"],
         # TODO
         currency: "IDR",
-        note: estimate[:note]
+        note: estimate["note"]
       }
     end)
   end

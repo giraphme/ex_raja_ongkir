@@ -2,9 +2,6 @@ defmodule ExRajaOngkir.Cost do
   alias ExRajaOngkir.Request
 
   defstruct [
-    :from,
-    :to,
-    :weight,
     :weight_unit,
     :courier_code,
     :courier_name,
@@ -94,15 +91,12 @@ defmodule ExRajaOngkir.Cost do
     )
   end
 
-  defp response_into(response, %__MODULE__{params: params} = struct) do
+  defp response_into(response, %__MODULE__{} = struct) do
     response
     |> Enum.map(fn row ->
       base_struct = %{
         struct
-        | from: params[:from],
-          to: params[:destination],
-          weight: params[:weight],
-          weight_unit: 'g',
+        | weight_unit: 'g',
           courier_code: row["code"],
           courier_name: row["name"]
       }

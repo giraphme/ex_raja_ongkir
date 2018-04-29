@@ -23,8 +23,30 @@ defmodule ExRajaOngkir.CostTest do
         courier = @params[:courier] || "jne"
         opts = @params[:opts] || []
 
-        assert {:ok, %{jne: [%ExRajaOngkir.Cost{}]}} =
-                 ExRajaOngkir.Cost.calculate(from, to, weight, courier, opts)
+        assert {:ok, results} = ExRajaOngkir.Cost.calculate(from, to, weight, courier, opts)
+
+        %{jne: [%ExRajaOngkir.Cost{}]}
+
+        Enum.each(results, fn {provider, costs} ->
+          assert provider
+          assert is_atom(provider)
+          assert is_list(costs)
+          assert %ExRajaOngkir.Cost{} = cost = List.first(costs)
+          assert is_binary(cost.courier_code)
+          assert is_binary(cost.courier_name)
+          assert is_binary(cost.description)
+          assert is_list(cost.estimates)
+          assert %ExRajaOngkir.Estimate{} = estimate = List.first(cost.estimates)
+          assert is_binary(estimate.currency)
+          assert is_binary(estimate.etd)
+          assert is_integer(estimate.price)
+          assert cost.params[:origin] == from
+          assert cost.params[:destination] == to
+          assert is_binary(cost.params[:courier])
+          assert cost.params[:weight] == weight
+          assert is_binary(cost.service_name)
+          assert is_binary(cost.service_name)
+        end)
 
         Application.put_env(:ex_raja_ongkir, :plan, default_plan)
       end
