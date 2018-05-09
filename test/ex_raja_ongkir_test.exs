@@ -36,14 +36,6 @@ defmodule ExRajaOngkirTest do
         ExRajaOngkir.api_key()
       end)
     end
-
-    test "It fail to get the API key because didn't set" do
-      Application.put_env(:ex_raja_ongkir, :api_key, nil)
-
-      assert_raise(ExRajaOngkir.Exception.NoApiKey, fn ->
-        ExRajaOngkir.api_key()
-      end)
-    end
   end
 
   describe "ExRajaOngkir.base_url/0" do

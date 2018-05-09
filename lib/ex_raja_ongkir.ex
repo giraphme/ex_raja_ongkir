@@ -1,6 +1,7 @@
 defmodule ExRajaOngkir do
+  @default_api_key {:system, "RAJA_ONGKIR_API_KEY"}
   def api_key do
-    Application.get_env(:ex_raja_ongkir, :api_key, nil)
+    (Application.get_env(:ex_raja_ongkir, :api_key, nil) || @default_api_key)
     |> case do
       {:system, env_name} when is_binary(env_name) ->
         System.get_env(env_name)
@@ -13,8 +14,9 @@ defmodule ExRajaOngkir do
     end
   end
 
+  @default_plan :starter
   def plan do
-    Application.get_env(:ex_raja_ongkir, :plan, nil)
+    Application.get_env(:ex_raja_ongkir, :plan, nil) || @default_plan
   end
 
   def base_url do
