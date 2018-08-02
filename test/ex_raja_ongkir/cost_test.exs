@@ -25,8 +25,6 @@ defmodule ExRajaOngkir.CostTest do
 
         assert {:ok, results} = ExRajaOngkir.Cost.calculate(from, to, weight, courier, opts)
 
-        %{jne: [%ExRajaOngkir.Cost{}]}
-
         Enum.each(results, fn {provider, costs} ->
           assert provider
           assert is_atom(provider)
@@ -51,5 +49,21 @@ defmodule ExRajaOngkir.CostTest do
         Application.put_env(:ex_raja_ongkir, :plan, default_plan)
       end
     end)
+
+    test "It should return error if the weight is too small" do
+      default_plan = Application.get_env(:ex_raja_ongkir, :plan)
+      Application.put_env(:ex_raja_ongkir, :plan, :pro)
+
+      assert {:error, _reason} =
+               ExRajaOngkir.Cost.calculate(
+                 %ExRajaOngkir.City{id: "1"},
+                 %ExRajaOngkir.City{id: "2"},
+                 0,
+                 "jne",
+                 []
+               )
+
+      Application.put_env(:ex_raja_ongkir, :plan, default_plan)
+    end
   end
 end
