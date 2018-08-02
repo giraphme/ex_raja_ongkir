@@ -30,7 +30,7 @@ defmodule ExRajaOngkir.MixProject do
       {:power_assert, "~> 0.1.1", only: :test},
       {:httpotion, "~> 3.1.0"},
       {:jason, "~> 1.0"},
-      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false, github: "ignota/mix-test.watch"},
+      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false}
     ]
   end
